@@ -1,0 +1,22 @@
+{% extends '../content.html' %}
+{% load static %}
+
+    {% block header %}
+
+        Password Reset
+
+    {% endblock %}
+
+    {% block text %}
+            <form action = "" method="post">
+                {% csrf_token %}
+                {% for message in messages %}
+                <strong>{{ message }}</strong>
+                {% endfor %}
+                <p>Enter Email:<br></p>
+                {{ form.email }}
+                <input type="submit" value="Submit">
+
+            </form>
+
+    {% endblock %}

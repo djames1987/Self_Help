@@ -1,0 +1,41 @@
+version: '3.1'
+
+services:
+
+  web:
+    build: .
+    container_name: SelfHelpWeb
+    command: gunicorn Self_Help.wsgi --bind 0.0.0.0:8001 --chdir /home/app/Self_Help
+    depends_on:
+      - db
+    volumes:
+      - .:/usr/src/app
+    network_mode: "bridge"
+    ports:
+      - 8001:8001
+      - 8002:8002
+
+  db:
+    container_name: SelfHelpDB
+    image: mariadb
+    restart: always
+    volumes:
+      - ./Self_Help/dbData:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: pal3Game35
+      MYSQL_DATABASE: SelfHelp
+      MYSQL_USER: SelfHelp
+      MYSQL_PASSWORD: d@mpCamel80
+
+    ports:
+      - 3306:3306
+    network_mode: "bridge"
+
+  adminer:
+    container_name: SelfHelpAdminer
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8080
+    network_mode: "bridge"
+      

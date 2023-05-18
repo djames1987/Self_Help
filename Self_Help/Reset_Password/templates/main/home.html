@@ -1,0 +1,14 @@
+{% extends '../content.html' %}
+
+    {% block header %}
+
+        {{ request.identity_context_data.username }}
+
+    {% endblock %}
+
+    {% block text %}
+        Welcome to Atchison County Self Help. Choose one of the following options!<br><br>
+
+            <a class="btn btn-success" href="{% url 'password_reset' %}">Reset Password</a>
+            <a class="btn btn-success" href="{% url 'register' %}">Setup Security Questions</a> *Must setup security question to use "Forgot password"
+    {% endblock %}

@@ -1,0 +1,48 @@
+{% extends '../content.html' %}
+
+    {% block header %}
+
+        Register Account
+
+
+    {% endblock %}
+
+    {% block text %}
+        {% if request.identity_context_data.authenticated %}
+
+            <form action = "" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Submit">
+            </form>
+
+        {% else %}
+            Please use the "Sign In" button to login to your County account.<br>
+            If you do not know your password and have not registered, please submit a ticket to IT.
+        {% endif %}
+    {% endblock %}
+{% block footer%}
+
+            <script>
+$(document).ready(function() {
+$('select').on('change', function() {
+  var selectedValues = [];
+  $('select').each(function() {
+    var thisValue = this.value;
+    if(thisValue !== '')
+      selectedValues.push(thisValue);
+  }).each(function() {
+    $(this).find('option:not(:selected)').each(function() {
+      if( $.inArray( this.value, selectedValues ) === -1 ) {
+        $(this).removeAttr('hidden');
+      } else {
+        if(this.value !== '')
+          $(this).attr('hidden', 'hidden');
+      }
+    });
+  });
+});
+});
+            </script>
+
+{% endblock %}
